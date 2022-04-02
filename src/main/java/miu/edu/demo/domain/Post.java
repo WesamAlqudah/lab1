@@ -4,9 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -17,4 +16,7 @@ public class Post {
     long id;
     String title,author,content;
 
-     }
+    @OneToMany(cascade= CascadeType.ALL)
+    @JoinColumn(name= "id_post")
+    List<Comment>commentList;
+}
