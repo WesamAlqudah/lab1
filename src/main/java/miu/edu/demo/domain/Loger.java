@@ -1,12 +1,10 @@
 package miu.edu.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
 
@@ -18,9 +16,13 @@ public class Loger {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long transaction;
-    Date date;
-    double time;
-    int principle;
+    Date datetime;
+    double duration;
+    @ManyToOne
+    @JoinColumn(name = "principle_id")
+    @JsonBackReference
+    Userr principle;
     String operation;
+
 
 }

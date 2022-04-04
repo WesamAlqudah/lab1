@@ -1,8 +1,8 @@
 package miu.edu.demo.aspect;
 
 import miu.edu.demo.domain.Loger;
+import miu.edu.demo.domain.Userr;
 import miu.edu.demo.service.LogerService;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -22,16 +22,17 @@ public class LoggerAspect {
 
     }
     @Around("logOperation()")
-    public void logOperation(ProceedingJoinPoint joinPoint) throws Throwable {// C P
+    public Object logOperation(ProceedingJoinPoint joinPoint) throws Throwable {// C P
         long start = System.currentTimeMillis();
-        Object proceed = joinPoint.proceed();
         long executionTime = System.currentTimeMillis() - start;
         Loger loger = new Loger();
         loger.setOperation(joinPoint.getSignature().getName());
-        loger.setDate(new Date());
-        loger.setTime(executionTime);
-        loger.setPrinciple(1);
+        loger.setDatetime(new Date());
+        loger.setDuration(executionTime);
+        loger.setPrinciple(Userr.getLoggedInUser());
         logerService.save(loger);
+        return joinPoint.proceed();
+
 
     }
 
