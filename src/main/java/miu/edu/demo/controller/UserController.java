@@ -1,6 +1,7 @@
 package miu.edu.demo.controller;
 
 
+import miu.edu.demo.aspect.annotation.ExecutionTime;
 import miu.edu.demo.domain.Userr;
 import miu.edu.demo.domain.dto.PostDto;
 import miu.edu.demo.domain.dto.UserDto;
@@ -26,6 +27,7 @@ public class UserController {
         return service.findAll();
     }
 
+    @ExecutionTime
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> getById(@PathVariable int id) {
         var user = service.getUserById(id);

@@ -14,7 +14,7 @@ public interface PostRepo extends CrudRepository<Post, Long> {
 
 
 
-    @Query("SELECT  p FROM Post p WHERE p.author=:author")
+    @Query("SELECT  p FROM Post p WHERE p.author=:author")//JPQL - ch 3 sl 41
     List<Post> findPostsByAuthor(String author);
 
     @Query("SELECT  p FROM Post p WHERE p.title =:title")
