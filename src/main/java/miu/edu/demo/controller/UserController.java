@@ -24,6 +24,12 @@ public class UserController {
 
     @GetMapping
     public List<UserDto> getPosts(){
+
+        return service.findAll();
+    }
+    @GetMapping("/test")//lab4
+    public List<UserDto> getPostsTest(){
+        int x = 5/0;
         return service.findAll();
     }
 
