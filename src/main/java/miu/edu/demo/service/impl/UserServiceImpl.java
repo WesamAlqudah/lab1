@@ -17,36 +17,39 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    UserRepo userRepo;
 
     @Autowired
     ModelMapper modelMapper;
 
     @Autowired
+    UserRepo userRepo;
 
-    ListMapper<User, UserDto> listMapperUser2Dto;
+
     @Autowired
-    ListMapper<Post, PostDto> listMapperPost2Dto;
-
+    ListMapper<User,UserDto> listMapperUserToDto;
     @Override
     public List<UserDto> findAll() {
-        return (List<UserDto>) listMapperUser2Dto.mapList((List<User>) userRepo.findAll(), new UserDto());
+        return (List<UserDto>)listMapperUserToDto.mapList(userRepo.findAll(),new UserDto());
     }
 
     @Override
-    public UserDto getUserById(long id) {
-        return modelMapper.map(userRepo.findById(id).get(), UserDto.class);
+    public UserDto findByIdDto(long id) {
+        return modelMapper.map( userRepo.findById(id) , UserDto.class );
     }
 
     @Override
-    public List<PostDto> getPostsOfUserById(long id) {
-        return (List<PostDto>) listMapperPost2Dto.mapList(userRepo.findById(id).get().getPost(), new PostDto());
+    public List<User> findAllByIdIn(List<Long> user_ids) {
+        return userRepo.findAllByIdIn(user_ids);
     }
 
     @Override
-    public void save(User userr) {
-        userRepo.save(userr);
+    public User findById(long id) {
+        return userRepo.findById(id);
+    }
+
+    @Override
+    public void save(UserDto p) {
+        userRepo.save(modelMapper.map(p, User.class));
     }
 
     @Override
@@ -55,7 +58,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(int id, UserDto userDto) {
-        userRepo.save(modelMapper.map(userDto, User.class));
+    public List<User> findUsersWithGivenNumberOfPosts(int count) {
+        return userRepo.findUsersWithGivenNumberOfPosts(count);
     }
+
 }

@@ -1,7 +1,7 @@
 package miu.edu.demo.controller;
 
-import miu.edu.demo.domain.dto.LoginRequest;
- import miu.edu.demo.service.AuthService;
+import miu.edu.demo.domain.dto.request.LoginRequest;
+import miu.edu.demo.service.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

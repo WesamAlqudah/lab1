@@ -17,7 +17,7 @@ public interface PostRepo extends CrudRepository<Post, Long> {
     List<Post> findAll();
 
 
-    List<Post> findAllByUser(Optional<User> user);
+    List<Post> findAllByUser(User user);
     List<Post> findAllByTitle(String title);
     @Query(value = "SELECT user_id FROM posts GROUP BY user_id HAVING COUNT(user_id) > :count", nativeQuery = true)
     List<Long> findAllByUserCount(int count);

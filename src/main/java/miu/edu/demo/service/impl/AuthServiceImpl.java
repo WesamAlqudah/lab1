@@ -3,7 +3,7 @@ package miu.edu.demo.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import miu.edu.demo.domain.dto.LoginRequest;
+import miu.edu.demo.domain.dto.request.LoginRequest;
 import miu.edu.demo.domain.dto.response.LoginResponse;
 import miu.edu.demo.service.AuthService;
 import miu.edu.demo.util.JwtUtil;

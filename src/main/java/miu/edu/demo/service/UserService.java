@@ -7,11 +7,18 @@ import miu.edu.demo.domain.dto.UserDto;
 import java.util.List;
 
 public interface UserService {
-
     List<UserDto> findAll();
-    UserDto getUserById(long id);
-    List<PostDto> getPostsOfUserById(long id);
-    void save(User userr);
+
+    UserDto findByIdDto(long id);
+
+    List<User> findAllByIdIn(List<Long> user_ids);
+
+    User findById(long id);
+
+    void save(UserDto user);
+
     void delete(long id);
-    void update(int id, UserDto p);
+
+    List<User> findUsersWithGivenNumberOfPosts(int count);
+
 }

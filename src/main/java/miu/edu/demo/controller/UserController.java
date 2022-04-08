@@ -2,11 +2,14 @@ package miu.edu.demo.controller;
 
 
 import miu.edu.demo.aspect.annotation.ExecutionTime;
+import miu.edu.demo.domain.Post;
 import miu.edu.demo.domain.User;
 import miu.edu.demo.domain.dto.PostDto;
 import miu.edu.demo.domain.dto.UserDto;
+import miu.edu.demo.service.PostService;
 import miu.edu.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,46 +22,71 @@ public class UserController {
 
 
     @Autowired
-    UserService service;
+    UserService userService;
+
+    @Autowired
+    PostService postService;
 
 
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public List<UserDto> getPosts(){
-
-        return service.findAll();
+    public List<UserDto> getUsers(){
+        return userService.findAll();
     }
-    @GetMapping("/test")//lab4
-    public List<UserDto> getPostsTest(){
-        int x = 5/0;
-        return service.findAll();
+
+    @GetMapping("/{id}/dto")
+    public UserDto getUserDto(@PathVariable("id") long id){
+        return userService.findByIdDto(id);
     }
 
     @ExecutionTime
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getById(@PathVariable int id) {
-        var user = service.getUserById(id);
-        return ResponseEntity.ok(user);
+    public User getUser(@PathVariable("id") long id){
+        return userService.findById(id);
     }
 
     @GetMapping("/{id}/posts")
-    public ResponseEntity<List<PostDto>> getPostsByUserId(@PathVariable int id) {
-        var post = service.getPostsOfUserById(id);
-        return ResponseEntity.ok(post);
+    public List<Post> getPosts(@PathVariable("id") long idUser){
+        return postService.findPostByUser(idUser);
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void save(@RequestBody User userr) {
-        service.save(userr);
+    public void saveUser( @RequestBody UserDto p ){
+        userService.save(p);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id) {
-        service.delete(id);
+    public void deleteUser(@PathVariable("id") long id){
+        userService.delete(id);
     }
 
-    @PutMapping("/{id}")
-    public void update(@PathVariable("id") int postId, @RequestBody UserDto uDto) {
-        service.update(postId, uDto);
+    /*@ResponseStatus(HttpStatus.OK)
+    @GetMapping("/count/{count}")
+    public List<User> getUsers(@PathVariable int count){
+        List<Long> user_ids = postService.findAllByUserCount(count);
+        return userService.findAllByIdIn(user_ids);
+    }*/
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/count/{count}")
+    public List<User> getUsers(@PathVariable int count){
+        return userService.findUsersWithGivenNumberOfPosts(count);
     }
+
+
+
+   /* @GetMapping("/filter/review/{val}")
+    public List<User> findProductsReviewMoreThan(@PathVariable("val") int val){
+        return userService.findHaveReviewMoreThan(val);
+    }
+
+    @GetMapping("/filter/price/{val}")
+    public List<User> findByPrice(@PathVariable("val") float val){
+        return productService.findByPriceGreaterThan(val);
+    }*/
+
+
+
 
 }

@@ -47,7 +47,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Post> findPostByUser(long idUser) {
-        Optional<User> user = userRepo.findById(idUser);
+        User user = userRepo.findById(idUser);
         return postRepo.findAllByUser(user);
     }
 
