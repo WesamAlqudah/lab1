@@ -12,6 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Table(name = "comments")
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,5 +21,9 @@ public class Comment {
     String name;
     @ManyToOne
     @JsonBackReference//**
-    Post postLi;
+    Post post;
+    public Comment(String name){
+        this.name = name;
+    }
+
 }

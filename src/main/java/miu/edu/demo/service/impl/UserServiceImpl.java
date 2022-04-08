@@ -1,13 +1,13 @@
 package miu.edu.demo.service.impl;
 
 import miu.edu.demo.domain.Post;
-import miu.edu.demo.domain.Userr;
+import miu.edu.demo.domain.User;
 
 import miu.edu.demo.domain.dto.PostDto;
 import miu.edu.demo.domain.dto.UserDto;
-import miu.edu.demo.helper.ListMapper;
-import miu.edu.demo.repo.UserRepo;
+ import miu.edu.demo.repo.UserRepo;
 import miu.edu.demo.service.UserService;
+import miu.edu.demo.util.ListMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,13 +24,14 @@ public class UserServiceImpl implements UserService {
     ModelMapper modelMapper;
 
     @Autowired
-    ListMapper<Userr, UserDto> listMapperUser2Dto;
+
+    ListMapper<User, UserDto> listMapperUser2Dto;
     @Autowired
     ListMapper<Post, PostDto> listMapperPost2Dto;
 
     @Override
     public List<UserDto> findAll() {
-        return (List<UserDto>) listMapperUser2Dto.mapList((List<Userr>) userRepo.findAll(), new UserDto());
+        return (List<UserDto>) listMapperUser2Dto.mapList((List<User>) userRepo.findAll(), new UserDto());
     }
 
     @Override
@@ -40,11 +41,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<PostDto> getPostsOfUserById(long id) {
-        return (List<PostDto>) listMapperPost2Dto.mapList(userRepo.findById(id).get().getPosts(), new PostDto());
+        return (List<PostDto>) listMapperPost2Dto.mapList(userRepo.findById(id).get().getPost(), new PostDto());
     }
 
     @Override
-    public void save(Userr userr) {
+    public void save(User userr) {
         userRepo.save(userr);
     }
 
@@ -55,6 +56,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void update(int id, UserDto userDto) {
-        userRepo.save(modelMapper.map(userDto, Userr.class));
+        userRepo.save(modelMapper.map(userDto, User.class));
     }
 }

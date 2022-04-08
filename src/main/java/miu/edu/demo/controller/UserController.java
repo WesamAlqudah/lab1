@@ -2,7 +2,7 @@ package miu.edu.demo.controller;
 
 
 import miu.edu.demo.aspect.annotation.ExecutionTime;
-import miu.edu.demo.domain.Userr;
+import miu.edu.demo.domain.User;
 import miu.edu.demo.domain.dto.PostDto;
 import miu.edu.demo.domain.dto.UserDto;
 import miu.edu.demo.service.UserService;
@@ -47,7 +47,7 @@ public class UserController {
     }
 
     @PostMapping
-    public void save(@RequestBody Userr userr) {
+    public void save(@RequestBody User userr) {
         service.save(userr);
     }
 

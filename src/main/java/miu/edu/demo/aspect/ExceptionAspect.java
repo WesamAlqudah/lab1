@@ -2,8 +2,7 @@ package miu.edu.demo.aspect;
 
 
 import miu.edu.demo.domain.Exception;
-import miu.edu.demo.domain.Loger;
-import miu.edu.demo.service.ExceptionService;
+ import miu.edu.demo.service.ExceptionService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;

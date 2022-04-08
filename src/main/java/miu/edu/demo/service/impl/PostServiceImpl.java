@@ -1,56 +1,63 @@
 package miu.edu.demo.service.impl;
 
 import miu.edu.demo.domain.Post;
+import miu.edu.demo.domain.User;
 import miu.edu.demo.domain.dto.PostDto;
-import miu.edu.demo.helper.ListMapper;
-import miu.edu.demo.repo.PostRepo;
+ import miu.edu.demo.repo.PostRepo;
+import miu.edu.demo.repo.UserRepo;
 import miu.edu.demo.service.PostService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@Transactional
+
 public class PostServiceImpl implements PostService {
 
     @Autowired
-    PostRepo repo;
+    PostRepo postRepo;
 
     @Autowired
-    ModelMapper modelMapper;
-
-    @Autowired
-    ListMapper<Post, PostDto> listMapperPost2Dto;
+    UserRepo userRepo;
 
     @Override
-    public List<PostDto> findAll() {
-        return (List<PostDto>) listMapperPost2Dto.mapList((List<Post>) repo.findAll(), new PostDto());
+    public void save(PostDto dto, String email) {
+        Post p = new Post();
+        p.setTitle(dto.getTitle());
+        p.setContent(dto.getContent());
+
+        var user = userRepo.findByEmail(email);
+        p.setUser(user);
+        postRepo.save(p);
     }
 
     @Override
-    public PostDto getPostById(long id) {
-        return modelMapper.map(repo.findById(id), PostDto.class);
+    public List<Post> getAll() {
+        return postRepo.findAll();
     }
 
     @Override
-    public void save(PostDto pDto) {
-        repo.save(modelMapper.map(pDto, Post.class));
+    public Post findById(long id) {
+        return postRepo.findById(id);
     }
 
     @Override
-    public void delete(long id) {
-        repo.deleteById(id);
+    public List<Post> findPostByUser(long idUser) {
+        Optional<User> user = userRepo.findById(idUser);
+        return postRepo.findAllByUser(user);
     }
 
     @Override
-    public void update(int id, PostDto pDto) {
-        repo.save(modelMapper.map(pDto, Post.class));
+    public List<Post> findTitle(String title) {
+        return postRepo.findAllByTitle(title);
     }
 
     @Override
-    public List<PostDto> findAllPostsByAuthor(String author) {
-        return new ArrayList<>();
+    public List<Long> findAllByUserCount(int count) {
+        return postRepo.findAllByUserCount(count);
     }
 }

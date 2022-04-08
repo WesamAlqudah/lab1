@@ -1,6 +1,5 @@
 package miu.edu.demo.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,29 +9,30 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.List;
-
 @Data
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Post {
+@Entity
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String title;
-    private String content;
-    private String author;
+    private String email;
+    private String password;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable
+    private List<Role> roles;
 
-    @ManyToOne()
-    @JoinColumn(name="user_id")
-    @JsonBackReference
-    private User user;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     @JsonManagedReference
     @Fetch(FetchMode.SELECT)
-    private List<Comment> comments;
+    private List<Post> post;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "principle")
+    private List<Logger> logger;
 
+    public static User getLoggedInUser() {
+        return null;
+    }
 }
