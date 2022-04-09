@@ -1,9 +1,7 @@
 package miu.edu.demo.service.impl;
 
-import miu.edu.demo.domain.Post;
-import miu.edu.demo.domain.User;
+import miu.edu.demo.domain.Userr;
 
-import miu.edu.demo.domain.dto.PostDto;
 import miu.edu.demo.domain.dto.UserDto;
  import miu.edu.demo.repo.UserRepo;
 import miu.edu.demo.service.UserService;
@@ -12,9 +10,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
 
@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Autowired
-    ListMapper<User,UserDto> listMapperUserToDto;
+    ListMapper<Userr,UserDto> listMapperUserToDto;
     @Override
     public List<UserDto> findAll() {
         return (List<UserDto>)listMapperUserToDto.mapList(userRepo.findAll(),new UserDto());
@@ -38,18 +38,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAllByIdIn(List<Long> user_ids) {
+    public List<Userr> findAllByIdIn(List<Long> user_ids) {
         return userRepo.findAllByIdIn(user_ids);
     }
 
     @Override
-    public User findById(long id) {
+    public Userr findById(long id) {
         return userRepo.findById(id);
     }
 
     @Override
     public void save(UserDto p) {
-        userRepo.save(modelMapper.map(p, User.class));
+        userRepo.save(modelMapper.map(p, Userr.class));
     }
 
     @Override
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findUsersWithGivenNumberOfPosts(int count) {
+    public List<Userr> findUsersWithGivenNumberOfPosts(int count) {
         return userRepo.findUsersWithGivenNumberOfPosts(count);
     }
 

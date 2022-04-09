@@ -1,6 +1,6 @@
 package miu.edu.demo.repo;
 
- import miu.edu.demo.domain.User;
+ import miu.edu.demo.domain.Userr;
  import org.springframework.data.jpa.repository.Query;
  import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -8,15 +8,15 @@ import org.springframework.stereotype.Repository;
  import java.util.List;
 
 @Repository
-public interface UserRepo extends CrudRepository<User, Long> {
+public interface UserRepo extends CrudRepository<Userr, Long> {
 
-    List<User> findAll();
-    User findById(long id);
-    List<User> findAllByIdIn(List<Long> user_ids);
+    List<Userr> findAll();
+    Userr findById(long id);
+    List<Userr> findAllByIdIn(List<Long> user_ids);
 
-    @Query("select u from User u where u.post.size > :count") // JBQL query
-    List<User> findUsersWithGivenNumberOfPosts(int count);
+    @Query("select u from Userr u where u.post.size > :count") // JBQL query
+    List<Userr> findUsersWithGivenNumberOfPosts(int count);
 
-    User findByEmail(String username);
+    Userr findByEmail(String username);
 
 }

@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostDto {
-    long id;
-    String title;
-    String content;
-    String author;
+
+    private String title;
+    private String content;
+    private long idUser;
 }

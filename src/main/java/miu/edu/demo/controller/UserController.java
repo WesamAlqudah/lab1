@@ -3,14 +3,12 @@ package miu.edu.demo.controller;
 
 import miu.edu.demo.aspect.annotation.ExecutionTime;
 import miu.edu.demo.domain.Post;
-import miu.edu.demo.domain.User;
-import miu.edu.demo.domain.dto.PostDto;
+import miu.edu.demo.domain.Userr;
 import miu.edu.demo.domain.dto.UserDto;
 import miu.edu.demo.service.PostService;
 import miu.edu.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,7 +39,7 @@ public class UserController {
 
     @ExecutionTime
     @GetMapping("/{id}")
-    public User getUser(@PathVariable("id") long id){
+    public Userr getUser(@PathVariable("id") long id){
         return userService.findById(id);
     }
 
@@ -70,7 +68,7 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/count/{count}")
-    public List<User> getUsers(@PathVariable int count){
+    public List<Userr> getUsers(@PathVariable int count){
         return userService.findUsersWithGivenNumberOfPosts(count);
     }
 

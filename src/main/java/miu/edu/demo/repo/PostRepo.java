@@ -1,13 +1,12 @@
 package miu.edu.demo.repo;
 
 import miu.edu.demo.domain.Post;
-import miu.edu.demo.domain.User;
+import miu.edu.demo.domain.Userr;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface PostRepo extends CrudRepository<Post, Long> {
@@ -17,7 +16,7 @@ public interface PostRepo extends CrudRepository<Post, Long> {
     List<Post> findAll();
 
 
-    List<Post> findAllByUser(User user);
+    List<Post> findAllByUser(Userr user);
     List<Post> findAllByTitle(String title);
     @Query(value = "SELECT user_id FROM posts GROUP BY user_id HAVING COUNT(user_id) > :count", nativeQuery = true)
     List<Long> findAllByUserCount(int count);

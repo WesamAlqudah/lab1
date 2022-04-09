@@ -27,7 +27,7 @@ public class Post {
     @ManyToOne()
     @JoinColumn(name="user_id")
     @JsonBackReference
-    private User user;
+    private Userr user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post", fetch = FetchType.LAZY)
     @JsonManagedReference

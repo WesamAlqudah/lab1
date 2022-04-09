@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import miu.edu.demo.domain.Post;
+import miu.edu.demo.domain.Role;
 
 import java.util.List;
 
@@ -12,6 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 public class UserDto {
 
-    long id;
-    String name;
+    private long id;
+    private String name;
+    private List<Role> roles;
+
 }

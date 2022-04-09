@@ -1,7 +1,7 @@
 package miu.edu.demo;
 
 import miu.edu.demo.domain.Role;
- import miu.edu.demo.domain.User;
+ import miu.edu.demo.domain.Userr;
 import miu.edu.demo.repo.RoleRepo;
 import miu.edu.demo.repo.UserRepo;
 import org.modelmapper.ModelMapper;
@@ -47,7 +47,7 @@ public class DemoApplication implements CommandLineRunner {
 		List<Role> rolesList = new ArrayList<>();
 		rolesList.add(role1);
 
-		User userData = new User(1, "alqudah@miu.edu", passwordEncoder.encode("12345"), rolesList, null, null );
+		Userr userData = new Userr(1, "alqudah@miu.edu", passwordEncoder.encode("12345"), rolesList, null, null );
 		userRepo.save(userData);
 	}
 }

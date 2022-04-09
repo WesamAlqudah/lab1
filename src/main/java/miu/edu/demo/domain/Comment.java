@@ -21,7 +21,8 @@ public class Comment {
     String name;
     @ManyToOne
     @JsonBackReference//**
-    Post post;
+    @JoinColumn(name="post_id")
+    private Post post;
     public Comment(String name){
         this.name = name;
     }

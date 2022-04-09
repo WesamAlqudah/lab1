@@ -1,7 +1,6 @@
 package miu.edu.demo.service;
 
-import miu.edu.demo.domain.User;
-import miu.edu.demo.domain.dto.PostDto;
+import miu.edu.demo.domain.Userr;
 import miu.edu.demo.domain.dto.UserDto;
 
 import java.util.List;
@@ -11,14 +10,14 @@ public interface UserService {
 
     UserDto findByIdDto(long id);
 
-    List<User> findAllByIdIn(List<Long> user_ids);
+    List<Userr> findAllByIdIn(List<Long> user_ids);
 
-    User findById(long id);
+    Userr findById(long id);
 
     void save(UserDto user);
 
     void delete(long id);
 
-    List<User> findUsersWithGivenNumberOfPosts(int count);
+    List<Userr> findUsersWithGivenNumberOfPosts(int count);
 
 }

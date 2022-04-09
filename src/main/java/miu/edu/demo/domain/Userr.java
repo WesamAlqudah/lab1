@@ -13,7 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class User {
+@Table(name = "users")
+public class Userr {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -32,7 +33,7 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "principle")
     private List<Logger> logger;
 
-    public static User getLoggedInUser() {
+    public static Userr getLoggedInUser() {
         return null;
     }
 }

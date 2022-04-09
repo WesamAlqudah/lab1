@@ -20,6 +20,6 @@ public class Logger {
     @ManyToOne
     @JoinColumn(name="principle_id")
     @JsonBackReference
-    private User principle;
+    private Userr principle;
 
 }

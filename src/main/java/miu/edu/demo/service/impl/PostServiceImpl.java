@@ -1,7 +1,7 @@
 package miu.edu.demo.service.impl;
 
 import miu.edu.demo.domain.Post;
-import miu.edu.demo.domain.User;
+import miu.edu.demo.domain.Userr;
 import miu.edu.demo.domain.dto.PostDto;
  import miu.edu.demo.repo.PostRepo;
 import miu.edu.demo.repo.UserRepo;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -47,7 +46,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Post> findPostByUser(long idUser) {
-        User user = userRepo.findById(idUser);
+        Userr user = userRepo.findById(idUser);
         return postRepo.findAllByUser(user);
     }
 
